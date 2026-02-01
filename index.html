@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sarika Drawing Pad</title>
-
+    <title>SarikaMarket - Premium E-Commerce Platform</title>
     <style>
         * {
             margin: 0;
@@ -12,156 +11,634 @@
             box-sizing: border-box;
         }
 
+        :root {
+    --primary-color: #3a86ff;
+    --secondary-color: #8338ec;
+    --accent-color: #ffbe0b;
+    --accent-hover: #ff9f1c;
+    --success-color: #06d6a0;
+    --text-primary: #2b2d42;
+    --text-secondary: #6c757d;
+    --border-color: #dee2e6;
+    --bg-light: #f8f9fa;
+    --bg-white: #ffffff;
+}
+
+
         body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #ffeef2 0%, #ffd9e0 50%, #fff5f7 100%);
             min-height: 100vh;
-            background-color: #eef2f7; /* color changed */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
+            padding: 30px 20px 50px;
+            color: var(--text-primary);
+            line-height: 1.6;
         }
 
-        h1 {
-            font-size: 24px;
-            font-weight: 600;
-            color: #1f3a5f; /* color changed */
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            background: var(--bg-white);
+            border-radius: 24px;
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+            border: 1px solid rgba(245, 202, 195, 0.3);
         }
 
-        .drawing-wrapper {
-            background: #ffffff;
-            padding: 12px;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #ffffff 0%, #fef7f8 100%);
+            color: var(--primary-color);
+            padding: 60px 50px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 2px solid var(--border-color);
         }
 
-        #drawingArea {
-            width: 800px;
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
             height: 500px;
-            background-color: #ffffff;
-            border: 2px solid #1f3a5f; /* color changed */
-            cursor: crosshair;
-            display: block;
+            background: radial-gradient(circle, rgba(10, 83, 156, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(232, 180, 184, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            letter-spacing: -2px;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #b70567 0%, #d328d6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        header p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+            letter-spacing: 0.3px;
+        }
+
+        /* Controls Section */
+        .controls-wrapper {
+            background: linear-gradient(to bottom, #fef7f8 0%, #ffffff 100%);
+            border-bottom: 1px solid var(--border-color);
+            padding: 35px 50px;
         }
 
         .controls {
-            margin-top: 12px;
-            text-align: center;
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            align-items: flex-end;
         }
 
-        button {
-            padding: 8px 18px;
-            font-size: 14px;
-            font-weight: 500;
-            background-color: #1f3a5f; /* color changed */
-            color: #fff;
-            border: none;
-            border-radius: 6px;
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            min-width: 240px;
+            flex: 1;
+        }
+
+        .control-group label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        select {
+            padding: 14px 18px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 1rem;
+            background: var(--bg-white);
             cursor: pointer;
-            transition: background-color 0.2s ease;
+            transition: all 0.3s ease;
+            outline: none;
+            font-weight: 500;
+            color: var(--text-primary);
+            appearance: none;
+            background-image: url('data:image/svg+xml,<svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L6 6L11 1" stroke="%238a7f8d" stroke-width="2" stroke-linecap="round"/></svg>');
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 40px;
         }
 
-        button:hover {
-            background-color: #162c46; /* color changed */
+        select:hover {
+            border-color: var(--accent-color);
+            background-color: #fffbfc;
         }
 
-        footer {
-            margin-top: 10px;
-            font-size: 13px;
-            color: #555;
+        select:focus {
+            border-color: var(--accent-hover);
+            box-shadow: 0 0 0 4px rgba(245, 202, 195, 0.2);
         }
 
-        footer a {
-            color: #1f3a5f; /* color changed */
-            text-decoration: none;
+        /* Products Grid */
+        .products-section {
+            padding: 50px;
+            background: linear-gradient(to bottom, #ffffff 0%, #fef7f8 100%);
+        }
+
+        .products-header {
+            margin-bottom: 35px;
+        }
+
+        .products-count {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
             font-weight: 500;
         }
 
-        footer a:hover {
-            text-decoration: underline;
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 35px;
+        }
+
+        /* Product Card */
+        .product-card {
+            background: var(--bg-white);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(245, 202, 195, 0.05) 0%, rgba(232, 180, 184, 0.05) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--accent-color);
+        }
+
+        .product-image {
+            height: 240px;
+            background: linear-gradient(135deg, #f5cac3 0%, #fde1dc 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(18, 146, 225, 0.337) 0%, rgba(255,255,255,0.1) 100%);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.98);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            z-index: 2;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(245, 125, 6, 0.4);
+        }
+
+        .product-info {
+            padding: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .product-category {
+            display: inline-block;
+            background: linear-gradient(135deg, #ffeef2 0%, #fff5f7 100%);
+            color: var(--primary-color);
+            padding: 7px 14px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 14px;
+            border: 1px solid rgba(245, 202, 195, 0.3);
+        }
+
+        .product-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 14px;
+            line-height: 1.4;
+            min-height: 3.6rem;
+            letter-spacing: -0.3px;
+        }
+
+        .product-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 18px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .product-price {
+            font-size: 1.75rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #67adf2 0%, #f73242 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .product-rating {
+            display: flex;
+            gap: 3px;
+            align-items: center;
+        }
+
+        .star {
+            color: #f9c74f;
+            font-size: 1.1rem;
+            filter: drop-shadow(0 1px 2px rgba(162, 131, 57, 0.2));
+        }
+
+        .star.empty {
+            color: #f4e4e6;
+        }
+
+        .rating-value {
+            margin-left: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        /* No Products */
+        .no-products {
+            text-align: center;
+            padding: 100px 40px;
+            color: var(--text-secondary);
+        }
+
+        .no-products-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        .no-products-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .no-products-subtext {
+            font-size: 1rem;
+            margin-top: 10px;
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #fef7f8 0%, #ffffff 100%);
+            color: var(--text-secondary);
+            text-align: center;
+            padding: 30px 50px;
+            font-size: 0.95rem;
+            border-top: 2px solid var(--border-color);
+        }
+
+        footer p {
+            color: var(--text-secondary);
+        }
+
+        .footer-credit {
+            margin-top: 10px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #9d2323 0%, #e8b4b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 40px 30px;
+            }
+
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            header p {
+                font-size: 1.1rem;
+            }
+
+            .controls-wrapper {
+                padding: 25px 30px;
+            }
+
+            .controls {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .control-group {
+                width: 100%;
+                min-width: 100%;
+            }
+
+            .products-section {
+                padding: 30px;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                gap: 20px;
+            }
+
+            footer {
+                padding: 25px 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 15px 10px 30px;
+            }
+
+            .container {
+                border-radius: 16px;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .product-card {
+            animation: fadeIn 0.5s ease forwards;
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <h1>SarikaMarket</h1>
+                <p>Curated premium products for the discerning shopper</p>
+            </div>
+        </header>
 
-    <!-- name changed -->
-    <h1>Sarika Drawing Pad</h1>
+        <div class="controls-wrapper">
+            <div class="controls">
+                <div class="control-group">
+                    <label for="categoryFilter">Category</label>
+                    <select id="categoryFilter">
+                        <option value="all">All Categories</option>
+                    </select>
+                </div>
 
-    <div class="drawing-wrapper">
-        <svg id="drawingArea"></svg>
-
-        <div class="controls">
-            <button id="clearButton">Clear Drawing</button>
+                <div class="control-group">
+                    <label for="sortOption">Sort By</label>
+                    <select id="sortOption">
+                        <option value="default">Featured</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="name-asc">Name: A to Z</option>
+                        <option value="name-desc">Name: Z to A</option>
+                        <option value="rating-low">Rating: Low to High</option>
+                        <option value="rating-high">Rating: High to Low</option>
+                    </select>
+                </div>
+            </div>
         </div>
+
+        <div class="products-section">
+            <div class="products-header">
+                <p class="products-count" id="productsCount"></p>
+            </div>
+            <div class="products-grid" id="productsGrid"></div>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 SarikaMarket. All rights reserved.</p>
+            <p class="footer-credit">Crafted with precision by Sarika Choudhary</p>
+        </footer>
     </div>
 
-    <footer>
-        <!-- author changed -->
-        Made by <a href="#" target="_blank">Sarika Choudhary</a>
-    </footer>
-
     <script>
-        const svg = document.getElementById("drawingArea");
-        const clearButton = document.getElementById("clearButton");
+        // Comprehensive product catalog
+        const products = [
+            { name: "AirPods Pro Max", price: 549.99, rating: 5, category: "Electronics", icon: "🎧", badge: "Premium" },
+            { name: "Apple Watch Ultra", price: 799.99, rating: 5, category: "Electronics", icon: "⌚", badge: "New" },
+            { name: "Sony Alpha A7 IV", price: 2499.99, rating: 5, category: "Electronics", icon: "📷", badge: "Pro" },
+            { name: "Logitech MX Master 3S", price: 99.99, rating: 5, category: "Electronics", icon: "🖱️", badge: "Bestseller" },
+            { name: "iPad Pro 12.9-inch", price: 1099.99, rating: 5, category: "Electronics", icon: "📱", badge: "Premium" },
+            { name: "Samsung 65\" QLED TV", price: 1799.99, rating: 5, category: "Electronics", icon: "📺", badge: "Featured" },
+            { name: "Bose SoundLink Revolve+", price: 329.99, rating: 4, category: "Electronics", icon: "🔊", badge: null },
+            { name: "DJI Mavic 3 Pro", price: 2199.99, rating: 5, category: "Electronics", icon: "🚁", badge: "Premium" },
+           
+            { name: "Italian Leather Briefcase", price: 389.99, rating: 5, category: "Accessories", icon: "💼", badge: "Luxury" },
+            { name: "Ray-Ban Aviator Classic", price: 179.99, rating: 5, category: "Accessories", icon: "🕶️", badge: "Iconic" },
+            { name: "Montblanc Leather Wallet", price: 425.99, rating: 5, category: "Accessories", icon: "👛", badge: "Premium" },
+            { name: "Omega Seamaster Watch", price: 5499.99, rating: 5, category: "Accessories", icon: "⌚", badge: "Luxury" },
+            { name: "Hermès Leather Belt", price: 679.99, rating: 5, category: "Accessories", icon: "📿", badge: "Designer" },
+            { name: "Tumi Alpha Backpack", price: 495.99, rating: 5, category: "Accessories", icon: "🎒", badge: "Premium" },
+           
+            { name: "Tom Ford Suit", price: 3899.99, rating: 5, category: "Fashion", icon: "🤵", badge: "Luxury" },
+            { name: "Ralph Lauren Oxford Shirt", price: 129.99, rating: 5, category: "Fashion", icon: "👔", badge: "Classic" },
+            { name: "Levi's 501 Original Jeans", price: 89.99, rating: 4, category: "Fashion", icon: "👖", badge: "Bestseller" },
+            { name: "Nike Air Jordan 1 Retro", price: 179.99, rating: 5, category: "Fashion", icon: "👟", badge: "Limited" },
+            { name: "Canada Goose Parka", price: 1495.99, rating: 5, category: "Fashion", icon: "🧥", badge: "Premium" },
+            { name: "Cashmere Sweater", price: 299.99, rating: 5, category: "Fashion", icon: "👕", badge: "Luxury" },
+            { name: "Hugo Boss Blazer", price: 595.99, rating: 5, category: "Fashion", icon: "🥋", badge: "Designer" },
+           
+            { name: "Clean Code by Robert Martin", price: 42.99, rating: 5, category: "Books", icon: "📚", badge: "Bestseller" },
+            { name: "The Design of Everyday Things", price: 38.99, rating: 5, category: "Books", icon: "📖", badge: null },
+            { name: "Atomic Habits", price: 27.99, rating: 5, category: "Books", icon: "📕", badge: "Popular" },
+            { name: "The Power of Now", price: 24.99, rating: 5, category: "Books", icon: "📗", badge: null },
+            { name: "Salt, Fat, Acid, Heat", price: 35.99, rating: 5, category: "Books", icon: "📘", badge: "Award Winner" },
+            { name: "Dune: Deluxe Edition", price: 49.99, rating: 5, category: "Books", icon: "📙", badge: "Collector's" }
+        ];
 
-        let isDrawing = false;
-        let currentPolyline = null;
-        let points = [];
+        // Extract unique categories
+        const categories = [...new Set(products.map(p => p.category))].sort();
+       
+        // Populate category dropdown
+        const categoryFilter = document.getElementById('categoryFilter');
+        categories.forEach(category => {
+            const option = document.createElement('option');
+            option.value = category;
+            option.textContent = category;
+            categoryFilter.appendChild(option);
+        });
 
-        function getMousePosition(event) {
-            const rect = svg.getBoundingClientRect();
-            return {
-                x: event.clientX - rect.left,
-                y: event.clientY - rect.top
-            };
+        // Generate star rating HTML
+        function createStars(rating) {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                stars += `<span class="star ${i <= rating ? '' : 'empty'}">★</span>`;
+            }
+            return stars + `<span class="rating-value">${rating}.0</span>`;
         }
 
-        function startDrawing(event) {
-            isDrawing = true;
-            event.preventDefault();
+        // Render products to the grid
+        function renderProducts(productsToRender) {
+            const grid = document.getElementById('productsGrid');
+            const countElement = document.getElementById('productsCount');
+           
+            countElement.textContent = `Showing ${productsToRender.length} ${productsToRender.length === 1 ? 'product' : 'products'}`;
 
-            const pos = getMousePosition(event);
-            points = [`${pos.x},${pos.y}`];
+            if (productsToRender.length === 0) {
+                grid.innerHTML = `
+                    <div class="no-products">
+                        <div class="no-products-icon">🔍</div>
+                        <div class="no-products-text">No products found</div>
+                        <div class="no-products-subtext">Try adjusting your filters or search criteria</div>
+                    </div>
+                `;
+                return;
+            }
 
-            currentPolyline = document.createElementNS(
-                "http://www.w3.org/2000/svg",
-                "polyline"
-            );
-
-            currentPolyline.setAttribute("fill", "none");
-            currentPolyline.setAttribute("stroke", "#000");
-            currentPolyline.setAttribute("stroke-width", "2");
-            currentPolyline.setAttribute("stroke-linecap", "round");
-            currentPolyline.setAttribute("stroke-linejoin", "round");
-            currentPolyline.setAttribute("points", points.join(" "));
-
-            svg.appendChild(currentPolyline);
+            grid.innerHTML = productsToRender.map((product, index) => `
+                <div class="product-card" style="animation-delay: ${index * 0.05}s">
+                    <div class="product-image">
+                        ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
+                        ${product.icon}
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">${product.category}</span>
+                        <h3 class="product-name">${product.name}</h3>
+                        <div class="product-details">
+                            <span class="product-price">$${product.price.toFixed(2)}</span>
+                            <div class="product-rating">
+                                ${createStars(product.rating)}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
         }
 
-        function draw(event) {
-            if (!isDrawing) return;
+        // Apply filters and sorting
+        function updateProducts() {
+            const selectedCategory = categoryFilter.value;
+            const selectedSort = document.getElementById('sortOption').value;
 
-            const pos = getMousePosition(event);
-            points.push(`${pos.x},${pos.y}`);
-            currentPolyline.setAttribute("points", points.join(" "));
+            // Filter by category
+            let filteredProducts = selectedCategory === 'all'
+                ? [...products]
+                : products.filter(p => p.category === selectedCategory);
+
+            // Apply sorting
+            switch(selectedSort) {
+                case 'price-low':
+                    filteredProducts.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-high':
+                    filteredProducts.sort((a, b) => b.price - a.price);
+                    break;
+                case 'name-asc':
+                    filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+                case 'name-desc':
+                    filteredProducts.sort((a, b) => b.name.localeCompare(a.name));
+                    break;
+                case 'rating-low':
+                    filteredProducts.sort((a, b) => a.rating - b.rating);
+                    break;
+                case 'rating-high':
+                    filteredProducts.sort((a, b) => b.rating - a.rating);
+                    break;
+                default:
+                    // Keep default order (featured)
+                    break;
+            }
+
+            renderProducts(filteredProducts);
         }
 
-        function stopDrawing() {
-            isDrawing = false;
-            currentPolyline = null;
-            points = [];
-        }
+        // Attach event listeners
+        categoryFilter.addEventListener('change', updateProducts);
+        document.getElementById('sortOption').addEventListener('change', updateProducts);
 
-        function clearDrawing() {
-            svg.innerHTML = "";
-        }
-
-        svg.addEventListener("mousedown", startDrawing);
-        svg.addEventListener("mousemove", draw);
-        window.addEventListener("mouseup", stopDrawing);
-        clearButton.addEventListener("click", clearDrawing);
+        // Initial render
+        updateProducts();
     </script>
-
 </body>
 </html>
